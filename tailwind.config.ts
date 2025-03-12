@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,7 +62,51 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				// Custom colors
+				navy: {
+					50: '#f0f3f9',
+					100: '#dbe1f0',
+					200: '#bbc9e3',
+					300: '#92a7cf',
+					400: '#6c84b8',
+					500: '#4c63a0',
+					600: '#3e4e86',
+					700: '#34406c',
+					800: '#2c3659',
+					900: '#1a2038',
+					950: '#101324',
+				},
+				terracotta: {
+					50: '#fbf2ee',
+					100: '#f5e2d8',
+					200: '#ecc1b3',
+					300: '#e09a83',
+					400: '#d57859',
+					500: '#c65f3e',
+					600: '#ae482f',
+					700: '#8d3829',
+					800: '#752f28',
+					900: '#622a24',
+					950: '#361411',
+				},
+				sand: {
+					50: '#f9f7f4',
+					100: '#f3efe5',
+					200: '#e5dbcb',
+					300: '#d7c1a8',
+					400: '#c6a47f',
+					500: '#b98961',
+					600: '#ab7757',
+					700: '#8c6048',
+					800: '#724e3d',
+					900: '#5e4134',
+					950: '#32221b',
+				},
+			},
+			fontFamily: {
+				sans: ['Inter', 'sans-serif'],
+				display: ['DM Sans', 'sans-serif'],
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -84,11 +129,64 @@ export default {
 					to: {
 						height: '0'
 					}
-				}
+				},
+				fadeIn: {
+					from: {
+						opacity: '0',
+						transform: 'translateY(10px)'
+					},
+					to: {
+						opacity: '1',
+						transform: 'translateY(0)'
+					}
+				},
+				fadeInSlow: {
+					from: {
+						opacity: '0',
+					},
+					to: {
+						opacity: '1',
+					}
+				},
+				slideInRight: {
+					from: {
+						opacity: '0',
+						transform: 'translateX(20px)'
+					},
+					to: {
+						opacity: '1',
+						transform: 'translateX(0)'
+					}
+				},
+				slideInLeft: {
+					from: {
+						opacity: '0',
+						transform: 'translateX(-20px)'
+					},
+					to: {
+						opacity: '1',
+						transform: 'translateX(0)'
+					}
+				},
+				slideInUp: {
+					from: {
+						opacity: '0',
+						transform: 'translateY(20px)'
+					},
+					to: {
+						opacity: '1',
+						transform: 'translateY(0)'
+					}
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'fade-in': 'fadeIn 0.5s ease-out forwards',
+				'fade-in-slow': 'fadeInSlow 1s ease-out forwards',
+				'slide-in-right': 'slideInRight 0.5s ease-out forwards',
+				'slide-in-left': 'slideInLeft 0.5s ease-out forwards',
+				'slide-in-up': 'slideInUp 0.5s ease-out forwards',
 			}
 		}
 	},
