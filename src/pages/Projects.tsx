@@ -1,9 +1,8 @@
-
 import React from 'react';
 import ProjectCard from '@/components/ProjectCard';
 import { Building, Building2, LandPlot } from 'lucide-react';
 
-const projectsData = [
+export const projectsData = [
   {
     id: 1,
     title: "Addis Skyline Tower",
