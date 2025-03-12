@@ -1,13 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ChevronLeft, Calendar, Building2, MapPin } from 'lucide-react';
+import { ChevronLeft, Calendar, Building2 } from 'lucide-react';
+import { projectsData } from './Projects';
 import { cn } from '@/lib/utils';
-
-interface ProjectImage {
-  src: string;
-  alt: string;
-}
 
 const ProjectDetail = () => {
   const { projectId } = useParams<{ projectId: string }>();
@@ -16,35 +12,58 @@ const ProjectDetail = () => {
   const [mainImage, setMainImage] = useState<string>('');
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
-  // Mock function to fetch project data (in a real app this would be an API call)
+  // Generate mock gallery images for the projects
+  const generateGalleryImages = (projectImage: string) => {
+    // For demo purposes, we'll use the same image multiple times
+    return [
+      projectImage,
+      projectImage,
+      projectImage,
+      projectImage,
+      projectImage,
+      projectImage
+    ];
+  };
+
   useEffect(() => {
-    // Importing the project data from the Projects page
-    import('./Projects').then((module) => {
-      const allProjects = module.default.type.render().props.children[2].props.children;
+    // Find the project that matches the URL parameter
+    const foundProject = projectsData.find(project => 
+      project.title.toLowerCase().replace(/\s+/g, '-') === projectId
+    );
+    
+    if (foundProject) {
+      // Create a mock gallery for the project
+      const projectWithGallery = {
+        ...foundProject,
+        gallery: generateGalleryImages(foundProject.image),
+        fullDescription: `
+          <p class="mb-4">The ${foundProject.title} is one of our flagship ${foundProject.category.toLowerCase()} projects completed in ${foundProject.completionDate}.</p>
+          
+          <p class="mb-4">This project demonstrates our commitment to excellence in construction, utilizing cutting-edge technologies and sustainable materials throughout the building process.</p>
+          
+          <h3 class="text-xl font-semibold my-4">Key Features:</h3>
+          <ul class="list-disc pl-5 mb-4 space-y-2">
+            <li>Sustainable design with energy-efficient systems</li>
+            <li>Locally sourced materials to reduce carbon footprint</li>
+            <li>Advanced structural engineering for maximum safety</li>
+            <li>Innovative space utilization for optimal functionality</li>
+            <li>State-of-the-art technological integration</li>
+          </ul>
+          
+          <p class="mb-4">Our team of experts worked diligently to ensure this project was completed on time and within budget, while exceeding client expectations in terms of quality and craftsmanship.</p>
+          
+          <h3 class="text-xl font-semibold my-4">Project Challenges:</h3>
+          <p class="mb-4">During construction, we overcame several challenges including difficult terrain conditions, material supply constraints, and complex regulatory requirements. Our problem-solving approach and technical expertise allowed us to navigate these obstacles successfully.</p>
+          
+          <p>The ${foundProject.title} stands as a testament to our company's dedication to delivering exceptional construction projects across Ethiopia.</p>
+        `
+      };
       
-      // Find the project that matches the URL parameter
-      const foundProject = allProjects.find((project: any) => 
-        project.props.title.toLowerCase().replace(/\s+/g, '-') === projectId
-      );
-      
-      if (foundProject) {
-        const project = foundProject.props;
-        // Get the full project data including gallery from projectsData
-        const fullProject = module.projectsData.find((p: any) => 
-          p.title.toLowerCase().replace(/\s+/g, '-') === projectId
-        );
-        
-        if (fullProject) {
-          setCurrentProject({...project, ...fullProject});
-          setMainImage(fullProject.gallery[0]);
-        }
-      }
-      
-      setLoading(false);
-    }).catch(error => {
-      console.error("Failed to load project data:", error);
-      setLoading(false);
-    });
+      setCurrentProject(projectWithGallery);
+      setMainImage(projectWithGallery.gallery[0]);
+    }
+    
+    setLoading(false);
   }, [projectId]);
 
   const handleThumbnailClick = (image: string, index: number) => {
@@ -95,7 +114,7 @@ const ProjectDetail = () => {
           </div>
 
           {currentProject.gallery && (
-            <div className="grid grid-cols-3 gap-4 mb-8">
+            <div className="grid grid-cols-3 sm:grid-cols-6 gap-4 mb-8">
               {currentProject.gallery.map((image: string, index: number) => (
                 <div 
                   key={index}
@@ -149,7 +168,7 @@ const ProjectDetail = () => {
               </p>
               <Link 
                 to="/contact" 
-                className="btn btn-primary w-full"
+                className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-white shadow hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring w-full"
               >
                 Get in Touch
               </Link>
@@ -168,7 +187,40 @@ const ProjectDetail = () => {
       <div className="mt-16">
         <h2 className="text-2xl font-bold mb-8">Other Projects You Might Like</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* We'll show a few other projects here */}
+          {projectsData
+            .filter(project => project.id !== currentProject.id)
+            .slice(0, 3)
+            .map(project => (
+              <div key={project.id} className="bg-white rounded-lg shadow-lg overflow-hidden">
+                <img src={project.image} alt={project.title} className="w-full h-48 object-cover" />
+                <div className="p-4">
+                  <span className="badge bg-primary/20 text-primary px-2 py-1 rounded-full text-xs font-medium">
+                    {project.category}
+                  </span>
+                  <h3 className="text-lg font-semibold mt-2">{project.title}</h3>
+                  <Link 
+                    to={`/projects/${project.title.toLowerCase().replace(/\s+/g, '-')}`}
+                    className="text-primary font-medium hover:text-secondary transition-colors inline-flex items-center mt-3"
+                  >
+                    View Details
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-4 w-4 ml-1"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M14 5l7 7m0 0l-7 7m7-7H3"
+                      />
+                    </svg>
+                  </Link>
+                </div>
+              </div>
+            ))}
         </div>
       </div>
     </div>

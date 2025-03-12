@@ -1,6 +1,8 @@
+
 import React from 'react';
 import ProjectCard from '@/components/ProjectCard';
 import { Building, Building2, LandPlot } from 'lucide-react';
+import AnimatedCounter from '@/components/AnimatedCounter';
 
 export const projectsData = [
   {
@@ -67,6 +69,34 @@ const Projects = () => {
         <p className="text-xl text-muted-foreground max-w-3xl animate-fade-in-slow">
           Explore our portfolio of successful projects across Ethiopia, showcasing our expertise in various construction domains.
         </p>
+      </div>
+      
+      {/* Stats Section */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        <div className="bg-white p-6 rounded-lg shadow-md text-center">
+          <div className="text-4xl font-bold text-primary mb-2">
+            <AnimatedCounter end={25} duration={2000} />+
+          </div>
+          <p className="text-muted-foreground">Years Experience</p>
+        </div>
+        <div className="bg-white p-6 rounded-lg shadow-md text-center">
+          <div className="text-4xl font-bold text-primary mb-2">
+            <AnimatedCounter end={200} duration={2000} />+
+          </div>
+          <p className="text-muted-foreground">Projects Completed</p>
+        </div>
+        <div className="bg-white p-6 rounded-lg shadow-md text-center">
+          <div className="text-4xl font-bold text-primary mb-2">
+            <AnimatedCounter end={50} duration={2000} />+
+          </div>
+          <p className="text-muted-foreground">Expert Team Members</p>
+        </div>
+        <div className="bg-white p-6 rounded-lg shadow-md text-center">
+          <div className="text-4xl font-bold text-primary mb-2">
+            <AnimatedCounter end={15} duration={2000} />+
+          </div>
+          <p className="text-muted-foreground">Industry Awards</p>
+        </div>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
