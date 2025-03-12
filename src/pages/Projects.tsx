@@ -10,7 +10,7 @@ export const projectsData = [
     title: "Addis Skyline Tower",
     category: "Commercial",
     description: "A 25-story commercial building in the heart of Addis Ababa, featuring modern design and sustainable materials.",
-    image: "/placeholder.svg",
+    image: "https://images.unsplash.com/photo-1486325212027-8081e485255e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     icon: <Building className="h-5 w-5" />,
     completionDate: "2022",
   },
@@ -19,7 +19,7 @@ export const projectsData = [
     title: "Hawassa Industrial Park",
     category: "Industrial",
     description: "A large-scale industrial park development with advanced infrastructure and eco-friendly waste management systems.",
-    image: "/placeholder.svg",
+    image: "https://images.unsplash.com/photo-1552319704-41c50bafb9d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     icon: <Building2 className="h-5 w-5" />,
     completionDate: "2021",
   },
@@ -28,7 +28,7 @@ export const projectsData = [
     title: "Mekelle Residential Complex",
     category: "Residential",
     description: "A modern residential complex with 200 units, communal spaces, and integrated green areas.",
-    image: "/placeholder.svg",
+    image: "https://images.unsplash.com/photo-1507149833265-60c372daea22?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     icon: <LandPlot className="h-5 w-5" />,
     completionDate: "2023",
   },
@@ -37,7 +37,7 @@ export const projectsData = [
     title: "Bahir Dar University Campus Extension",
     category: "Educational",
     description: "Extension of the Bahir Dar University campus, including new lecture halls, laboratories, and student facilities.",
-    image: "/placeholder.svg",
+    image: "https://images.unsplash.com/photo-1592211916012-bb33550b1536?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     icon: <Building className="h-5 w-5" />,
     completionDate: "2021",
   },
@@ -46,7 +46,7 @@ export const projectsData = [
     title: "Dire Dawa Highway Project",
     category: "Infrastructure",
     description: "A 120km highway construction project connecting major economic zones with modern safety features.",
-    image: "/placeholder.svg",
+    image: "https://images.unsplash.com/photo-1595841696677-6489ff3f8cd1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     icon: <LandPlot className="h-5 w-5" />,
     completionDate: "2022",
   },
@@ -55,7 +55,7 @@ export const projectsData = [
     title: "Gondar Heritage Hotel",
     category: "Hospitality",
     description: "A luxury hotel that blends traditional Ethiopian architecture with modern amenities and sustainability features.",
-    image: "/placeholder.svg",
+    image: "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     icon: <Building2 className="h-5 w-5" />,
     completionDate: "2023",
   }
@@ -97,6 +97,15 @@ const Projects = () => {
           </div>
           <p className="text-muted-foreground">Industry Awards</p>
         </div>
+      </div>
+      
+      {/* CTA Section with updated text color */}
+      <div className="bg-navy-50 p-8 rounded-lg shadow-lg mb-16 text-center">
+        <h2 className="text-3xl font-bold mb-4 text-secondary">Ready to Start Your Construction Project?</h2>
+        <p className="text-navy-700 mb-6 max-w-2xl mx-auto">
+          Let's turn your vision into reality. Our team of experts is ready to help you bring your construction project to life.
+        </p>
+        <a href="/contact" className="btn btn-primary btn-lg">Get in Touch</a>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
