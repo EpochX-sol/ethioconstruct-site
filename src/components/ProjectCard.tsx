@@ -7,8 +7,9 @@ interface ProjectCardProps {
   title: string;
   category: string;
   description: string;
-  imageUrl: string;
-  link: string;
+  image: string;
+  icon?: React.ReactNode;
+  completionDate?: string;
   delay?: number;
 }
 
@@ -16,8 +17,9 @@ const ProjectCard = ({
   title,
   category,
   description,
-  imageUrl,
-  link,
+  image,
+  icon,
+  completionDate,
   delay = 0,
 }: ProjectCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -30,20 +32,24 @@ const ProjectCard = ({
         onMouseLeave={() => setIsHovered(false)}
       >
         <img
-          src={imageUrl}
+          src={image}
           alt={title}
           className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-navy-950/80 to-transparent opacity-80"></div>
         <div className="absolute bottom-0 left-0 p-6">
-          <span className="badge badge-primary mb-2">{category}</span>
+          <div className="flex items-center space-x-2 mb-2">
+            {icon && <div className="text-white">{icon}</div>}
+            <span className="badge bg-primary/20 text-primary px-2 py-1 rounded text-sm">{category}</span>
+          </div>
           <h3 className="text-xl font-semibold text-white">{title}</h3>
+          {completionDate && <p className="text-white/80 text-sm mt-1">Completed: {completionDate}</p>}
         </div>
       </div>
       <div className="p-6 flex flex-col flex-grow">
         <p className="text-muted-foreground mb-4 flex-grow">{description}</p>
         <Link
-          to={link}
+          to={`/projects/${title.toLowerCase().replace(/\s+/g, '-')}`}
           className="text-primary font-medium hover:underline inline-flex items-center self-start"
         >
           View Project
