@@ -67,22 +67,22 @@ const Index = () => {
       title: 'Addis Skyline Tower',
       category: 'Commercial',
       description: 'A 20-story office building in the heart of Addis Ababa, featuring modern design and sustainable materials.',
-      imageUrl: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=2070&auto=format&fit=crop',
-      link: '/projects',
+      image: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=2070&auto=format&fit=crop',
+      icon: <BuildingIcon className="h-5 w-5" />,
     },
     {
       title: 'Green Valley Residences',
       category: 'Residential',
       description: 'Luxury residential complex with 50 premium apartments surrounded by beautiful landscaped gardens.',
-      imageUrl: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=2074&auto=format&fit=crop',
-      link: '/projects',
+      image: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=2074&auto=format&fit=crop',
+      icon: <Home className="h-5 w-5" />,
     },
     {
       title: 'Awash-Kombolcha Highway',
       category: 'Infrastructure',
       description: 'A 120 km highway connecting major cities, built with advanced materials for longevity and safety.',
-      imageUrl: 'https://images.unsplash.com/photo-1541474019392-1bada91865fc?q=80&w=2070&auto=format&fit=crop',
-      link: '/projects',
+      image: 'https://images.unsplash.com/photo-1541474019392-1bada91865fc?q=80&w=2070&auto=format&fit=crop',
+      icon: <Truck className="h-5 w-5" />,
     },
   ];
 
@@ -245,8 +245,8 @@ const Index = () => {
                 title={project.title}
                 category={project.category}
                 description={project.description}
-                imageUrl={project.imageUrl}
-                link={project.link}
+                image={project.image}
+                icon={project.icon}
                 delay={index * 100}
               />
             ))}
