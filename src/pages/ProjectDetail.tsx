@@ -1,8 +1,19 @@
+
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ChevronLeft, Calendar, Building2 } from 'lucide-react';
 import { projectsData } from './Projects';
 import { cn } from '@/lib/utils';
+
+// Array of construction-related images for the gallery
+const constructionGalleryImages = [
+  "https://images.unsplash.com/photo-1488972685288-c3fd157d7c7a?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1541971875076-8f970d573be6?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1429497419816-9ca5cfb4571a?auto=format&fit=crop&w=800&q=80"
+];
 
 const ProjectDetail = () => {
   const { projectId } = useParams<{ projectId: string }>();
@@ -11,10 +22,9 @@ const ProjectDetail = () => {
   const [mainImage, setMainImage] = useState<string>('');
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
-  // Generate gallery images that are all the same as the main project image
-  const generateGalleryImages = (projectImage: string) => {
-    // For consistency, use the same image for all gallery items
-    return Array(6).fill(projectImage);
+  // Generate gallery images for the project
+  const generateGalleryImages = () => {
+    return constructionGalleryImages;
   };
 
   useEffect(() => {
@@ -24,10 +34,12 @@ const ProjectDetail = () => {
     );
     
     if (foundProject) {
-      // Create a mock gallery for the project using the same image
+      const gallery = generateGalleryImages();
+      
+      // Create a mock gallery for the project
       const projectWithGallery = {
         ...foundProject,
-        gallery: generateGalleryImages(foundProject.image),
+        gallery: gallery,
         fullDescription: `
           <p class="mb-4">The ${foundProject.title} is one of our flagship ${foundProject.category.toLowerCase()} projects completed in ${foundProject.completionDate}.</p>
           
@@ -52,7 +64,7 @@ const ProjectDetail = () => {
       };
       
       setCurrentProject(projectWithGallery);
-      setMainImage(projectWithGallery.gallery[0]);
+      setMainImage(gallery[0]);
     }
     
     setLoading(false);
