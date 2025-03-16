@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from 'react';
 import Hero from '@/components/Hero';
 import { Link } from 'react-router-dom';
@@ -66,25 +65,25 @@ const About = () => {
       name: "Alemayehu Tadesse",
       position: "Chief Executive Officer",
       bio: "With over 30 years in construction, Alemayehu founded EthioConstruct with a vision to transform Ethiopia's construction industry. He holds a Master's in Civil Engineering from Addis Ababa University.",
-      imageUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop",
+      imageUrl: "https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?q=80&w=2070&auto=format&fit=crop",
     },
     {
       name: "Frehiwot Bekele",
       position: "Chief Operations Officer",
       bio: "Frehiwot has 20 years of experience managing large-scale construction projects. She ensures operational excellence and timely project delivery across all EthioConstruct endeavors.",
-      imageUrl: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1961&auto=format&fit=crop",
+      imageUrl: "https://images.unsplash.com/photo-1589156280159-27698a70f29e?q=80&w=2086&auto=format&fit=crop",
     },
     {
       name: "Yonas Kebede",
       position: "Chief Technical Officer",
       bio: "A structural engineering expert with experience in international projects, Yonas oversees the technical aspects of all construction projects, ensuring highest quality standards.",
-      imageUrl: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop",
+      imageUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2070&auto=format&fit=crop",
     },
     {
       name: "Hiwot Mekonnen",
       position: "Architecture Director",
       bio: "Award-winning architect with a passion for blending modern designs with Ethiopian cultural elements, Hiwot leads our architectural planning and design department.",
-      imageUrl: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1976&auto=format&fit=crop",
+      imageUrl: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?q=80&w=2087&auto=format&fit=crop",
     },
   ];
 
@@ -300,9 +299,9 @@ const About = () => {
       <section className="py-20 bg-navy-800 text-white">
         <div className="container">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            <p  className="text-3xl md:text-4xl font-bold mb-6">
               Ready to Work With Us?
-            </h2>
+            </p>
             <p className="text-navy-100 text-lg mb-8 max-w-2xl mx-auto">
               Join the hundreds of satisfied clients who have trusted EthioConstruct with their construction projects.
             </p>

@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import ProjectCard from '@/components/ProjectCard';
 import { Building, Building2, LandPlot } from 'lucide-react';
 import AnimatedCounter from '@/components/AnimatedCounter';
@@ -10,7 +9,7 @@ export const projectsData = [
     title: "Addis Skyline Tower",
     category: "Commercial",
     description: "A 25-story commercial building in the heart of Addis Ababa, featuring modern design and sustainable materials.",
-    image: "https://images.unsplash.com/photo-1486325212027-8081e485255e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    image: "https://images.unsplash.com/photo-1486718448742-163732cd1544?auto=format&fit=crop&w=800&q=80",
     icon: <Building className="h-5 w-5" />,
     completionDate: "2022",
   },
@@ -19,7 +18,7 @@ export const projectsData = [
     title: "Hawassa Industrial Park",
     category: "Industrial",
     description: "A large-scale industrial park development with advanced infrastructure and eco-friendly waste management systems.",
-    image: "https://images.unsplash.com/photo-1552319704-41c50bafb9d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80",
     icon: <Building2 className="h-5 w-5" />,
     completionDate: "2021",
   },
@@ -28,7 +27,7 @@ export const projectsData = [
     title: "Mekelle Residential Complex",
     category: "Residential",
     description: "A modern residential complex with 200 units, communal spaces, and integrated green areas.",
-    image: "https://images.unsplash.com/photo-1507149833265-60c372daea22?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    image: "https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=800&q=80",
     icon: <LandPlot className="h-5 w-5" />,
     completionDate: "2023",
   },
@@ -37,7 +36,7 @@ export const projectsData = [
     title: "Bahir Dar University Campus Extension",
     category: "Educational",
     description: "Extension of the Bahir Dar University campus, including new lecture halls, laboratories, and student facilities.",
-    image: "https://images.unsplash.com/photo-1592211916012-bb33550b1536?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800&q=80",
     icon: <Building className="h-5 w-5" />,
     completionDate: "2021",
   },
@@ -46,7 +45,7 @@ export const projectsData = [
     title: "Dire Dawa Highway Project",
     category: "Infrastructure",
     description: "A 120km highway construction project connecting major economic zones with modern safety features.",
-    image: "https://images.unsplash.com/photo-1595841696677-6489ff3f8cd1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800&q=80",
     icon: <LandPlot className="h-5 w-5" />,
     completionDate: "2022",
   },
@@ -55,13 +54,38 @@ export const projectsData = [
     title: "Gondar Heritage Hotel",
     category: "Hospitality",
     description: "A luxury hotel that blends traditional Ethiopian architecture with modern amenities and sustainability features.",
-    image: "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
     icon: <Building2 className="h-5 w-5" />,
     completionDate: "2023",
   }
 ];
 
 const Projects = () => {
+  // Stats Section
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const statsRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !hasAnimated) {
+          setHasAnimated(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (statsRef.current) {
+      observer.observe(statsRef.current);
+    }
+
+    return () => {
+      if (statsRef.current) {
+        observer.unobserve(statsRef.current);
+      }
+    };
+  }, [hasAnimated]);
+
   return (
     <div className="container px-4 py-16 mx-auto">
       <div className="space-y-4 mb-12">
@@ -72,28 +96,28 @@ const Projects = () => {
       </div>
       
       {/* Stats Section */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+      <div ref={statsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
         <div className="bg-white p-6 rounded-lg shadow-md text-center">
           <div className="text-4xl font-bold text-primary mb-2">
-            <AnimatedCounter end={25} duration={2000} />+
+            {hasAnimated && <AnimatedCounter end={25} duration={2000} />}+
           </div>
           <p className="text-muted-foreground">Years Experience</p>
         </div>
         <div className="bg-white p-6 rounded-lg shadow-md text-center">
           <div className="text-4xl font-bold text-primary mb-2">
-            <AnimatedCounter end={200} duration={2000} />+
+            {hasAnimated && <AnimatedCounter end={200} duration={2000} />}+
           </div>
           <p className="text-muted-foreground">Projects Completed</p>
         </div>
         <div className="bg-white p-6 rounded-lg shadow-md text-center">
           <div className="text-4xl font-bold text-primary mb-2">
-            <AnimatedCounter end={50} duration={2000} />+
+            {hasAnimated && <AnimatedCounter end={50} duration={2000} />}+
           </div>
           <p className="text-muted-foreground">Expert Team Members</p>
         </div>
         <div className="bg-white p-6 rounded-lg shadow-md text-center">
           <div className="text-4xl font-bold text-primary mb-2">
-            <AnimatedCounter end={15} duration={2000} />+
+            {hasAnimated && <AnimatedCounter end={15} duration={2000} />}+
           </div>
           <p className="text-muted-foreground">Industry Awards</p>
         </div>

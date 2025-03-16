@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from 'react';
 import Hero from '@/components/Hero';
 import { Link } from 'react-router-dom';
@@ -85,7 +84,7 @@ const Services = () => {
         "Drainage and sewage systems",
         "Public facilities"
       ],
-      image: "https://images.unsplash.com/photo-1621950113037-9648679a6381?q=80&w=2070&auto=format&fit=crop"
+      image: "https://images.unsplash.com/photo-1545459720-aac8509eb02c?q=80&w=2070&auto=format&fit=crop"
     },
     {
       id: "renovation",
@@ -345,7 +344,7 @@ const Services = () => {
                   ))}
                 </ul>
                 
-                <Link to="/contact" className="btn btn-primary inline-flex items-center">
+                <Link to="/contact" className="btn btn-primary inline-flex items-center p-2">
                   Request a Quote
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
@@ -359,9 +358,9 @@ const Services = () => {
       <section className="py-20 bg-navy-800 text-white">
         <div className="container">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            <p className="text-3xl md:text-4xl font-bold mb-6">
               Ready to Start Your Construction Project?
-            </h2>
+            </p>
             <p className="text-navy-100 text-lg mb-8 max-w-2xl mx-auto">
               Contact us today to discuss your project requirements and get a personalized quote from our expert team.
             </p>

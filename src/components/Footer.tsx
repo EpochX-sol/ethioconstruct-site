@@ -1,4 +1,3 @@
-
 import { Link } from 'react-router-dom';
 import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
 
@@ -169,9 +168,14 @@ const Footer = () => {
 
         <div className="mt-12 pt-6 border-t border-navy-700">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-navy-100 text-sm">
-              © {currentYear} EthioConstruct. All rights reserved.
-            </p>
+            <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4">
+              <p className="text-navy-100 text-sm">
+                © {currentYear} EthioConstruct. All rights reserved.
+              </p>
+              <p className="text-navy-100 text-sm">
+                Powered by <a href="https://github.com/samuelwubalem" className="text-secondary hover:text-secondary/80 transition-colors">Samuel Wubalem</a>
+              </p>
+            </div>
             <div className="flex space-x-4 mt-4 md:mt-0">
               <a href="#" className="text-navy-100 text-sm hover:text-white transition-colors">
                 Privacy Policy

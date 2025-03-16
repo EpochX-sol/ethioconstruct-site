@@ -1,10 +1,9 @@
-
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Hero from '@/components/Hero';
 import ServiceCard from '@/components/ServiceCard';
 import ProjectCard from '@/components/ProjectCard';
-import { BuildingIcon, HardHat, Ruler, Truck, Users, Home } from 'lucide-react';
+import { BuildingIcon, HardHat, Ruler, Truck, LandPlot, Home } from 'lucide-react';
 
 const Index = () => {
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -77,13 +76,14 @@ const Index = () => {
       image: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=2074&auto=format&fit=crop',
       icon: <Home className="h-5 w-5" />,
     },
-    {
-      title: 'Awash-Kombolcha Highway',
-      category: 'Infrastructure',
-      description: 'A 120 km highway connecting major cities, built with advanced materials for longevity and safety.',
-      image: 'https://images.unsplash.com/photo-1541474019392-1bada91865fc?q=80&w=2070&auto=format&fit=crop',
-      icon: <Truck className="h-5 w-5" />,
-    },
+    { 
+      title: "Dire Dawa Highway Project",
+      category: "Infrastructure",
+      description: "A 120km highway construction project connecting major economic zones with modern safety features.",
+      image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800&q=80",
+      icon: <LandPlot className="h-5 w-5" />,
+ 
+    }
   ];
 
   const stats = [
@@ -139,18 +139,19 @@ const Index = () => {
               <p className="text-muted-foreground mb-8">
                 Our mission is to contribute to Ethiopia's development through high-quality construction services that stand the test of time. With a team of experienced professionals and a commitment to excellence, we turn visions into reality.
               </p>
-              <Link to="/about" className="btn btn-primary">
+              <Link to="/about" className="btn btn-primary p-2">
                 Learn More About Us
               </Link>
             </div>
             <div className="relative">
               <div className="relative z-10 rounded-lg overflow-hidden shadow-2xl transform translate-x-4 translate-y-4">
                 <img 
-                  src="https://images.unsplash.com/photo-1455887981523-0f04324a1856?q=80&w=2074&auto=format&fit=crop" 
+                  src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80" 
                   alt="Construction workers discussing plans" 
                   className="w-full h-auto"
                 />
               </div>
+              
               <div className="absolute inset-0 bg-navy-100 rounded-lg transform -translate-x-4 -translate-y-4"></div>
             </div>
           </div>
@@ -321,9 +322,9 @@ const Index = () => {
       <section className="py-20 bg-navy-900 text-white">
         <div className="container">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            <p className="text-3xl md:text-4xl font-bold mb-6">
               Ready to Start Your Construction Project?
-            </h2>
+            </p>
             <p className="text-navy-100 text-lg mb-8 max-w-2xl mx-auto">
               Contact us today for a consultation and quote. Our team is ready to bring your vision to life with expertise and precision.
             </p>

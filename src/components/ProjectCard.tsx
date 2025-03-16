@@ -1,8 +1,8 @@
-
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Card from './Card';
 import { ArrowRight } from 'lucide-react';
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface ProjectCardProps {
   title: string;
@@ -25,19 +25,39 @@ const ProjectCard = ({
 }: ProjectCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const projectUrl = `/projects/${title.toLowerCase().replace(/\s+/g, '-')}`;
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageSrc, setImageSrc] = useState(image);
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = image;
+    img.onload = () => {
+      setImageLoaded(true);
+      setImageSrc(image);
+    };
+    img.onerror = () => {
+      setImageSrc('/projects/fallback.jpg'); // Default fallback image
+      setImageLoaded(true);
+    };
+  }, [image]);
 
   return (
     <Card animationDelay={delay} className="group h-full flex flex-col transition-all duration-300 hover:shadow-xl overflow-hidden">
       <div
-        className="relative h-64 overflow-hidden"
+        className="relative h-64 overflow-hidden bg-navy-100"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <img
-          src={image}
-          alt={title}
-          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-        />
+        {!imageLoaded && (
+          <Skeleton className="w-full h-full" />
+        )}
+        {imageLoaded && (
+          <img
+            src={imageSrc}
+            alt={title}
+            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+          />
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-navy-950/90 via-navy-900/40 to-transparent opacity-90"></div>
         
         <div className="absolute bottom-0 left-0 right-0 p-6 transform transition-transform duration-300 ease-out">

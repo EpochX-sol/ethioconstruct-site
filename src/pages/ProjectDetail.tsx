@@ -1,9 +1,18 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ChevronLeft, Calendar, Building2 } from 'lucide-react';
 import { projectsData } from './Projects';
 import { cn } from '@/lib/utils';
+
+// Array of construction-related images for the gallery
+const constructionGalleryImages = [
+  "https://images.unsplash.com/photo-1488972685288-c3fd157d7c7a?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1541971875076-8f970d573be6?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1429497419816-9ca5cfb4571a?auto=format&fit=crop&w=800&q=80"
+];
 
 const ProjectDetail = () => {
   const { projectId } = useParams<{ projectId: string }>();
@@ -12,17 +21,9 @@ const ProjectDetail = () => {
   const [mainImage, setMainImage] = useState<string>('');
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
-  // Generate mock gallery images for the projects
-  const generateGalleryImages = (projectImage: string) => {
-    // For demo purposes, we'll use the same image multiple times
-    return [
-      projectImage,
-      projectImage,
-      projectImage,
-      projectImage,
-      projectImage,
-      projectImage
-    ];
+  // Generate gallery images for the project
+  const generateGalleryImages = () => {
+    return constructionGalleryImages;
   };
 
   useEffect(() => {
@@ -32,10 +33,12 @@ const ProjectDetail = () => {
     );
     
     if (foundProject) {
+      const gallery = generateGalleryImages();
+      
       // Create a mock gallery for the project
       const projectWithGallery = {
         ...foundProject,
-        gallery: generateGalleryImages(foundProject.image),
+        gallery: gallery,
         fullDescription: `
           <p class="mb-4">The ${foundProject.title} is one of our flagship ${foundProject.category.toLowerCase()} projects completed in ${foundProject.completionDate}.</p>
           
@@ -60,7 +63,7 @@ const ProjectDetail = () => {
       };
       
       setCurrentProject(projectWithGallery);
-      setMainImage(projectWithGallery.gallery[0]);
+      setMainImage(gallery[0]);
     }
     
     setLoading(false);
@@ -107,13 +110,13 @@ const ProjectDetail = () => {
         <div className="lg:col-span-2">
           <div className="bg-white rounded-lg shadow-lg overflow-hidden mb-6">
             <img 
-              src={mainImage || currentProject.image} 
-              alt={currentProject.title} 
+              src={mainImage || currentProject?.image} 
+              alt={currentProject?.title} 
               className="w-full h-[400px] object-cover"
             />
           </div>
 
-          {currentProject.gallery && (
+          {currentProject?.gallery && (
             <div className="grid grid-cols-3 sm:grid-cols-6 gap-4 mb-8">
               {currentProject.gallery.map((image: string, index: number) => (
                 <div 
@@ -139,26 +142,26 @@ const ProjectDetail = () => {
         <div className="lg:col-span-1">
           <div className="bg-white rounded-lg shadow-lg p-6">
             <div className="inline-block badge bg-primary/20 text-primary px-2 py-1 rounded-full text-sm font-medium mb-4">
-              {currentProject.category}
+              {currentProject?.category}
             </div>
 
-            <h1 className="text-3xl font-bold mb-4">{currentProject.title}</h1>
+            <h1 className="text-3xl font-bold mb-4">{currentProject?.title}</h1>
 
             <div className="space-y-4 mb-6">
               <div className="flex items-center text-muted-foreground">
                 <Calendar className="h-5 w-5 mr-2" />
-                <span>Completed: {currentProject.completionDate}</span>
+                <span>Completed: {currentProject?.completionDate}</span>
               </div>
               
               <div className="flex items-center text-muted-foreground">
                 <Building2 className="h-5 w-5 mr-2" />
-                <span>{currentProject.category} Project</span>
+                <span>{currentProject?.category} Project</span>
               </div>
             </div>
 
             <div className="border-t border-gray-200 pt-6 mt-6">
               <h3 className="text-xl font-semibold mb-4">Project Overview</h3>
-              <p className="text-muted-foreground mb-6">{currentProject.description}</p>
+              <p className="text-muted-foreground mb-6">{currentProject?.description}</p>
             </div>
 
             <div className="bg-navy-50 p-4 rounded-lg">
@@ -180,7 +183,7 @@ const ProjectDetail = () => {
       {/* Project Details Section */}
       <div className="mt-12 bg-white rounded-lg shadow-lg p-8">
         <h2 className="text-2xl font-bold mb-6">Project Details</h2>
-        <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: currentProject.fullDescription }}></div>
+        <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: currentProject?.fullDescription }}></div>
       </div>
 
       {/* Related Projects */}
@@ -188,7 +191,7 @@ const ProjectDetail = () => {
         <h2 className="text-2xl font-bold mb-8">Other Projects You Might Like</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {projectsData
-            .filter(project => project.id !== currentProject.id)
+            .filter(project => project.id !== currentProject?.id)
             .slice(0, 3)
             .map(project => (
               <div key={project.id} className="bg-white rounded-lg shadow-lg overflow-hidden">
