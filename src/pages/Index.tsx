@@ -4,9 +4,12 @@ import Hero from '@/components/Hero';
 import ServiceCard from '@/components/ServiceCard';
 import ProjectCard from '@/components/ProjectCard';
 import { BuildingIcon, HardHat, Ruler, Truck, LandPlot, Home } from 'lucide-react';
+import AnimatedCounter from '@/components/AnimatedCounter';
 
 const Index = () => {
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const statsRef = useRef(null);
 
   useEffect(() => {
     const observers = sectionRefs.current.map((section, index) => {
@@ -25,14 +28,30 @@ const Index = () => {
       return observer;
     });
 
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !hasAnimated) {
+          setHasAnimated(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (statsRef.current) {
+      observer.observe(statsRef.current);
+    }
+
     return () => {
       observers.forEach((observer) => {
         if (observer) {
           observer.disconnect();
         }
       });
+      if (statsRef.current) {
+        observer.unobserve(statsRef.current);
+      }
     };
-  }, []);
+  }, [hasAnimated]);
 
   const services = [
     {
@@ -161,13 +180,31 @@ const Index = () => {
       {/* Stats Section */}
       <section className="bg-navy-900 py-16 text-white">
         <div className="container">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-4xl md:text-5xl font-bold text-secondary mb-2">{stat.number}</div>
-                <div className="text-navy-100 font-medium">{stat.label}</div>
+          <div ref={statsRef} className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="text-center">
+              <div className="text-4xl font-bold text-secondary mb-2">
+                {hasAnimated && <AnimatedCounter end={25} duration={2000} />}+
               </div>
-            ))}
+              <p className="text-navy-100">Years Experience</p>
+            </div>
+            <div className="text-center">
+              <div className="text-4xl font-bold text-secondary mb-2">
+                {hasAnimated && <AnimatedCounter end={200} duration={2000} />}+
+              </div>
+              <p className="text-navy-100">Projects Completed</p>
+            </div>
+            <div className="text-center">
+              <div className="text-4xl font-bold text-secondary mb-2">
+                {hasAnimated && <AnimatedCounter end={50} duration={2000} />}+
+              </div>
+              <p className="text-navy-100">Expert Team Members</p>
+            </div>
+            <div className="text-center">
+              <div className="text-4xl font-bold text-secondary mb-2">
+                {hasAnimated && <AnimatedCounter end={15} duration={2000} />}+
+              </div>
+              <p className="text-navy-100">Industry Awards</p>
+            </div>
           </div>
         </div>
       </section>
